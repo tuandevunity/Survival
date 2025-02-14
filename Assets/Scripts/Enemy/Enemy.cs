@@ -78,6 +78,7 @@ public class Enemy : MonoBehaviour
     private void Attack()
     {
         Debug.Log($"dealing {damage} to player");
+        player.TakeDamage(damage);
         attackTimer = 0;
     }
 
