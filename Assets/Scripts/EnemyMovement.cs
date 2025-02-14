@@ -17,6 +17,12 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float playerDetectionRadius;
 
+    [Header("Attack")]
+    [SerializeField] private int damage;
+    [SerializeField] private float attackFrequency;
+    private float attackDelay;
+    private float attackTimer;
+
     [Header("Effects")]
     [SerializeField] private ParticleSystem passAwayParticles;
 
@@ -42,6 +48,7 @@ public class EnemyMovement : MonoBehaviour
             setLoopPingPong(4).
             setOnComplete(SpawnSequenceCompleted);
 
+        attackDelay = 1f / attackFrequency;
     }
 
     // Update is called once per frame
@@ -50,7 +57,15 @@ public class EnemyMovement : MonoBehaviour
         if (!hasSpawned) return;
 
         FollowPlayer();
-        TryAttack();
+
+        if (attackTimer >= attackDelay)
+        {
+            TryAttack();
+        }
+        else
+        {
+            Wait();
+        }
     }
 
     private void FollowPlayer()
@@ -66,9 +81,19 @@ public class EnemyMovement : MonoBehaviour
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
         if (distanceToPlayer <= playerDetectionRadius)
         {
-            PassAway();
-            
+            Attack();
         }
+    }
+
+    private void Attack()
+    {
+        Debug.Log($"dealing {damage} to player");
+        attackTimer = 0;
+    }
+
+    private void Wait()
+    {
+        attackTimer += Time.deltaTime;
     }
 
     private void PassAway()

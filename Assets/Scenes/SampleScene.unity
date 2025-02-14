@@ -9107,6 +9107,8 @@ MonoBehaviour:
   spawnIndicator: {fileID: 1006286744}
   moveSpeed: 2
   playerDetectionRadius: 2
+  damage: 1
+  attackFrequency: 2
   passAwayParticles: {fileID: 1048769630}
   gizmos: 1
 --- !u!4 &1461142147
