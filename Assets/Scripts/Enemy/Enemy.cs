@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(EnemyMovement))]
 public class Enemy : MonoBehaviour
 {
     [Header("Components")]
     private EnemyMovement movement;
+
+
+    [Header("Health")]
+    [SerializeField] private int maxHealth;
+    [SerializeField] private TextMeshPro healthText;    
+    private int health;
 
     [Header("Elements")]
     private Player player;
@@ -37,6 +44,8 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        health = maxHealth;
+        healthText.text = health.ToString();
         movement = GetComponent<EnemyMovement>();
         player = FindFirstObjectByType<Player>();
         if (player == null)
@@ -80,6 +89,15 @@ public class Enemy : MonoBehaviour
         Debug.Log($"dealing {damage} to player");
         player.TakeDamage(damage);
         attackTimer = 0;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        int realDamage = Mathf.Min(damage, health);
+        health -= realDamage;
+        healthText.text = health.ToString();
+
+        if (health <= 0) PassAway();
     }
 
     private void Wait()
