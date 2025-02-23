@@ -45,9 +45,11 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        if (healthText == null) return;
         healthText.text = health.ToString();
         movement = GetComponent<EnemyMovement>();
         player = FindFirstObjectByType<Player>();
+        
         if (player == null)
         {
             Debug.Log("No found player, auto destroying...");
