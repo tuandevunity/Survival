@@ -5112,12 +5112,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  healthText: {fileID: 0}
   moveSpeed: 9
   playerDetectionRadius: 2
   renderer: {fileID: 9960335687931760}
   spawnIndicator: {fileID: 6921673196449028090}
-  damage: 0
+  damage: 1
   attackFrequency: 2
   passAwayParticles: {fileID: 6540218827624817776}
   gizmos: 1

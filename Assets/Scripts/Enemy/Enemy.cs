@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Health")]
     [SerializeField] private int maxHealth;
-    [SerializeField] private TextMeshPro healthText;    
+    /*[SerializeField] private TextMeshPro healthText;  */  
     private int health;
 
     [Header("Elements")]
@@ -45,8 +45,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         health = maxHealth;
-        if (healthText == null) return;
-        healthText.text = health.ToString();
+        /*if (healthText == null) return;
+        healthText.text = health.ToString();*/
         movement = GetComponent<EnemyMovement>();
         player = FindFirstObjectByType<Player>();
         
@@ -97,7 +97,7 @@ public class Enemy : MonoBehaviour
     {
         int realDamage = Mathf.Min(damage, health);
         health -= realDamage;
-        healthText.text = health.ToString();
+        /*healthText.text = health.ToString();*/
 
         if (health <= 0) PassAway();
     }
